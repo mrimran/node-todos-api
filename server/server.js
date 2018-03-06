@@ -47,7 +47,7 @@ app.get('/todos/:id', (req, res) => {
     }).catch((e) => console.log(e));
 })
 
-var port = 3000;
+var port = process.env.port || 3000;
 
 app.listen(port, () => {
     console.log(`Server started on ${port}`);
