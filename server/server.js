@@ -40,7 +40,7 @@ app.get('/todos/:id', (req, res) => {
 
     Todo.findById(id).then((todo) => {
         if(!todo) {
-            return res.status(400).send('Unable to find the id');
+            return res.status(404).send('Unable to find the id');
         }
 
         res.status(200).send({todo});
