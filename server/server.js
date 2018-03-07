@@ -1,3 +1,5 @@
+require('./config/config');
+
 var {ObjectId} = require('mongodb');
 var express = require('express');
 var bodyParser = require('body-parser');
