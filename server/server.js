@@ -1,4 +1,4 @@
-require('./config/config');
+require('./config/config.js');
 
 var {ObjectId} = require('mongodb');
 var express = require('express');
