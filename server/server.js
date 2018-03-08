@@ -109,11 +109,13 @@ app.get('/users/me', (req, res) => {
 
     User.findByToken(token).then((user) => {
         if(!user) {
-
+            return Promise.reject();//now exception catch will handle it.
         }
 
         res.send(user);
-    })
+    }).catch((e) => {
+        res.status(401).send();
+    });
 });
 
 var port = process.env.PORT || 3000;
