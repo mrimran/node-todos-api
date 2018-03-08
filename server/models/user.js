@@ -1,5 +1,3 @@
-import { resolve } from 'url';
-
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
