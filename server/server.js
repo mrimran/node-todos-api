@@ -104,6 +104,18 @@ app.post('/users', (req, res) => {
     }).catch((e) => res.status(400).send(e));
 });
 
+app.get('/users/me', (req, res) => {
+    var token = req.header('x-auth');
+
+    User.findByToken(token).then((user) => {
+        if(!user) {
+
+        }
+
+        res.send(user);
+    })
+});
+
 var port = process.env.PORT || 3000;
 
 app.listen(port, () => {

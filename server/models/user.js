@@ -1,3 +1,5 @@
+import { resolve } from 'url';
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
@@ -49,6 +51,23 @@ UserSchema.methods.generateAuthToken = function () {//arrow function don't bind 
 
     return user.save().then(() => {
         return token;
+    });
+}
+
+UserSchema.statics.findByToken = function (token) {
+    var User = this;
+    var decoded;
+
+    try{
+        decoded = jwt.verify(token, 'abc123');
+    } catch(e) {
+        return new Promise((resolve, reject));
+    }
+
+    return User.findOne({
+        _id: decoded._id,
+        'tokens.token': token,//quotes are required when there is dot in value
+        'tokens.access': 'auth'
     });
 }
 
