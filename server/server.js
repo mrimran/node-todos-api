@@ -121,6 +121,15 @@ app.post('/users/login', (req, res) => {
     });
 });
 
+//TODO: .update doesn't work for now, continue on this when there is reply
+app.delete('/users/me/token', authenticate, (req, res) => {
+    req.user.removeToken(req.token).then(() => {
+        res.status(200).send();
+    }, () => {//if things don't go well, going to be fired when errors.
+        res.status(400).send();
+    });
+});
+
 var port = process.env.PORT || 3000;
 
 app.listen(port, () => {

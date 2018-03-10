@@ -53,6 +53,16 @@ UserSchema.methods.generateAuthToken = function () {//arrow function don't bind 
     });
 }
 
+//TODO: .update doesn't work for now, continue on this when there is reply
+UserSchema.methods.removeToken = function(token) {
+    var user = this;
+    return user.udpate({
+        $pull: {//pull out any of the following criteria
+            tokens: {token}
+        }
+    });
+}
+
 UserSchema.statics.findByToken = function (token) {
     var User = this;
     var decoded;
