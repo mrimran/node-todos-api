@@ -16,7 +16,11 @@ const users = [{
 }, {
     _id: userTwoId,
     email: 'test2@test.com',
-    password: 'test2'
+    password: 'test2',
+    tokens: [{
+        access: 'auth',
+        token: jwt.sign({_id: userTwoId, access: 'auth'}, 'abc123').toString()
+    }]
 }];
 
 const populateUsers = (done) => {
@@ -31,12 +35,14 @@ const populateUsers = (done) => {
 //seeding database so it has data always
 const todos = [{
     _id: new ObjectId(),
-    text: 'First test todo'
+    text: 'First test todo',
+    _creator: userOneId
 }, {
     _id: new ObjectId(),
     text: 'Second test todo',
     completed: true,
-    completedAt: 5000
+    completedAt: 5000,
+    _creator: userTwoId
 }];
 
 const populateTodos = (done) => {//run some code before every test-case
